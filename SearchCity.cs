@@ -15,8 +15,6 @@ namespace CitySearch
     {
 
 
-
-
         public static async Task<bool> SearchAsync(string city)
         {
 

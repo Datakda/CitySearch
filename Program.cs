@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,12 +18,26 @@ namespace CitySearch
 
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-
-
-
             Console.WriteLine("Введите город:");
 
             string city = Console.ReadLine();
+
+           
+            var resultJson = SearchCityNewtonsoft.ReadCitiesLazy("city.list.json");
+
+            var result1 = resultJson.Where(x => x.name == city).FirstOrDefault();
+
+            if (result1 != null)
+            {
+                Console.WriteLine("Город найден");
+
+            }
+            else
+            {
+                Console.WriteLine("Город не найден");
+            }
+           
+            
 
 
             var result = await SearchCity.SearchAsync(city);
@@ -49,6 +64,7 @@ namespace CitySearch
             {
                 Console.WriteLine("Город не найден в бинарной версии");
             }
+            Console.WriteLine("Стоп");
         }
     }
 }
